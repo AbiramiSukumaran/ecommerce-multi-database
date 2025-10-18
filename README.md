@@ -15,17 +15,18 @@ pip install -r requirements.txt
 
 3. Update the .env file you cloned from the repo with your values:
 
-# --- DATABASE SECRETS ---
-# 1. MongoDB Connection String (from MongoDB Atlas)
+### --- DATABASE SECRETS ---
+#### 1. MongoDB Connection String (from MongoDB Atlas)
 MONGODB_CONNECTION_STRING="mongodb+srv://<db_user>:<db_password>@YOUR_CLUSTER.mongodb.net"
 
-# 2. Google Cloud Storage Bucket Name (from Step 5)
+#### 2. Google Cloud Storage Bucket Name (from Step 5)
 GCS_PRODUCT_BUCKET="your-ecommerce-product-media-bucket"
 
-# 3. MCP Toolbox Server Location
-# Must match the address where you run the toolbox server (usually localhost:5000)
+#### 3. MCP Toolbox Server Location
+ Must match the address where you run the toolbox server (we deployed it in Cloud Run)
 MCP_TOOLBOX_SERVER_URL="http://localhost:5000"
-4. Update the data layer
+
+#### 4. Update the data layer
 
 Update tools.yaml for placeholder with your values.
 
@@ -36,16 +37,18 @@ Test your tools.yaml tools locally:
 or
 
 ./TOOLBOX 
-5. Test your app locally
+
+#### 5. Test your app locally
 
 (Assuming you have completed all the prior sections and configurations in the blog):
 
 python app.py
-6. Check your Docker file and app.py starting point
+
+#### 6. Check your Docker file and app.py starting point
 
 Make sure your Docker file is updated as required based on the original that you cloned from the repo.
 
-7. Check if the app.py is updated
+#### 7. Check if the app.py is updated
 
 It should have the following snippet in case you had it changed for our local tests. (The file from the repo should already have this):
 
@@ -53,7 +56,8 @@ if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port, debug=False) 
     # NOTE: debug=False is crucial for production environments like Cloud Run
-8. Deploy your app to Cloud Run
+    
+#### 8. Deploy your app to Cloud Run
 
 gcloud run deploy multi-db-app --source .
 
